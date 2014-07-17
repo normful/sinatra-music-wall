@@ -16,7 +16,7 @@ Posted by <%= @song.author %>
   <% @more_songs.each do |song| %>
     <div class="song">
       <p>
-        <%= song.title %>
+        <a href="/songs/<%= song.id %>"><%= song.title %></a>
       </p>
       <p>
         <a href="<%= song.url %>"><%= song.url %></a>
