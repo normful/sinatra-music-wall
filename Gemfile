@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem 'rake'
 gem 'activesupport'
+gem 'validate_url'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
