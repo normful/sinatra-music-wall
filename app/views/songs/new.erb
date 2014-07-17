@@ -2,7 +2,7 @@
 <div>
   <strong>There following errors were detected with your song format. Please fix them and try again:</strong>
   <ul>
-    <% @song.errors.full_songs.each do |song| %>
+    <% @song.errors.full_messages.each do |song| %>
       <li><%= song %></li>
       <% end %>
   </ul>
