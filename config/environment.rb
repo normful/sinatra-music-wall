@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'active_support/all'
+require 'validate_url'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'
