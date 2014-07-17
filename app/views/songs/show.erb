@@ -1,0 +1,34 @@
+<h1><%= @song.title %></h1>
+<p>
+Posted by <%= @song.author %>
+</p>
+<p>
+  <a href="<%= @song.url %>"><%= @song.url %></a>
+</p>
+<p>
+  <small>
+    Created at: <%= @song.created_at %>
+  </small>
+</p>
+
+<% unless @more_songs.empty? %>
+  <h1>More posts by <%= @song.author %></h1>
+  <% @more_songs.each do |song| %>
+    <div class="song">
+      <p>
+        <%= song.title %>
+      </p>
+      <p>
+        <a href="<%= song.url %>"><%= song.url %></a>
+      </p>
+      <p>
+        <small>
+          Created at: <%= @song.created_at %>
+        </small>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+
+<hr/>
+<a href="/songs">Back to all songs</a>
