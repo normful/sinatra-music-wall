@@ -1,6 +1,6 @@
 <h1><%= @song.title %></h1>
 <p>
-Posted by <%= @User.find(@song.user_id) %>
+Posted by <%= User.find(@song.user_id).email %>
 </p>
 <p>
   <a href="<%= @song.url %>"><%= @song.url %></a>
@@ -12,7 +12,7 @@ Posted by <%= @User.find(@song.user_id) %>
 </p>
 
 <% unless @more_songs.empty? %>
-  <h1>More posts by <%= User.find(@song.user_id) %></h1>
+  <h1>More posts by <%= User.find(@song.user_id).email %></h1>
   <% @more_songs.each do |song| %>
     <div class="song">
       <p>
