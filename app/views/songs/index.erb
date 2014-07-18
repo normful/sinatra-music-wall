@@ -5,7 +5,7 @@
       <h3>
         <a href="/songs/<%= song.id %>"><%= song.title %></a>
         <small>
-          <%= song.author %>
+          <%= User.find(song.user_id) %>
         </small>
       </h3>
       <p>

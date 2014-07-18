@@ -61,16 +61,21 @@ get '/songs/new' do
 end
 
 post '/songs' do
-  @song = Song.new(
-    title: params[:title],
-    author: params[:author],
-    url: params[:url]
-  )
-  @song.save ? (redirect'/songs') : (erb :'songs/new')
+  begin
+    @song = Song.create!(
+      title: params[:title],
+      url: params[:url]
+    )
+    @user.songs << @song
+    @user.save
+    redirect'/songs'
+  rescue ActiveRecord::RecordInvalid
+    erb :'songs/new'
+  end
 end
 
 get '/songs/:id' do
   @song = Song.find params[:id]
-  @more_songs = Song.where.not(id: params[:id]).where(author: @song.author)
+  @more_songs = Song.where.not(id: params[:id]).where(user_id: @song.user_id)
   erb :'songs/show'
 end
