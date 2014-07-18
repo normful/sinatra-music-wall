@@ -30,7 +30,6 @@ end
 
 # User login
 get '/login' do
-  @user = User.new
   erb :'auth/login'
 end
 
@@ -63,11 +62,10 @@ end
 post '/songs' do
   begin
     @song = Song.create!(
+      user_id: current_user.id,
       title: params[:title],
       url: params[:url]
     )
-    @user.songs << @song
-    @user.save
     redirect'/songs'
   rescue ActiveRecord::RecordInvalid
     erb :'songs/new'
