@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :upvotes
+  has_many :songs, through: :upvotes
   validates :email,
     presence: true,
     uniqueness: true,
