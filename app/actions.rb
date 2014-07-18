@@ -50,7 +50,13 @@ end
 
 # Songs
 get '/songs' do
-  @songs = Song.all
+  @songs_with_upvotes = Song.joins(:upvotes).group("song_id").order("COUNT(*) DESC")
+  # SELECT *
+  # FROM songs INNER JOIN upvotes ON upvotes.song_id = songs.id
+  # GROUP BY song_id
+  # ORDER BY COUNT(*) DESC;
+  @all_songs = Song.all
+  @songs = (@songs_with_upvotes + @all_songs).uniq
   erb :'songs/index'
 end
 
