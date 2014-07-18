@@ -1,0 +1,23 @@
+<% if @user.errors.any? %>
+<div>
+  <strong>Error:</strong>
+  <ul>
+    <% @user.errors.full_messages.each do |user| %>
+      <li><%= song %></li>
+      <% end %>
+  </ul>
+</div>
+<% end %>
+<form method="post" action="/signup">
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" value="<%= @user.email %>">
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" value="<%= @user.password %>">
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>

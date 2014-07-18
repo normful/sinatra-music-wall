@@ -3,6 +3,25 @@ get '/' do
   erb :index
 end
 
+# User signup
+get '/signup' do
+  @user = User.new
+  erb :'auth/signup'
+end
+
+post '/signup' do
+  @user = User.new(
+    email: params[:email],
+    password: params[:password]
+  )
+  if @user.save
+    redirect '/songs'
+  else
+    erb :'auth/signup'
+  end
+end
+
+# Songs
 get '/songs' do
   @songs = Song.all
   erb :'songs/index'
