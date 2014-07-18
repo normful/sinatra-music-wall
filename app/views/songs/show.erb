@@ -7,7 +7,7 @@
 <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
   <form method="post" action="">
     <input type="hidden" name="song_id" value="<%= @song.id %>">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-success">
       Upvote
     </button>
   </form>

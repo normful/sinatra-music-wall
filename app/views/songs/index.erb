@@ -1,16 +1,21 @@
 <div class="songlist">
-<a href="/songs/new">Post a song</a>
-<% @songs.each do |song| %>
-  <div class="song">
-    <h2>
-      <a href="/songs/<%= song.id %>"><%= song.title %></a>
-    </h2>
-    <h4>
-      <%= User.find(song.user_id).email %>
-    </h4>
-    <p>
-      <a href="<%= song.url %>"><%= song.url %></a>
-    </p>
-  </div>
-<% end %>
+  <% @songs.each do |song| %>
+    <div class="song">
+      <h2>
+        <a href="/songs/<%= song.id %>"><%= song.title %></a>
+      </h2>
+      <h4>
+        <a href="<%= song.url %>"><%= song.url %></a>
+      </h4>
+      <h4>
+        <%= Upvote.where({ song_id: song.id }).size %> upvotes
+      </h4>
+      <h5>
+        Posted by <%= User.find(song.user_id).email %>
+      </h5>
+    </div>
+  <% end %>
+  <button class="btn btn-success" onclick="location.href='/songs/new'">
+      Post a new song
+    </button>
 </div>
