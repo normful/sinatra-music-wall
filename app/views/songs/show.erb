@@ -23,25 +23,36 @@ Posted by <%= User.find(@song.user_id).email %>
     Created at: <%= @song.created_at %>
   </small>
 </p>
-
 <% unless @more_songs.empty? %>
-  <h1>More posts by <%= User.find(@song.user_id).email %></h1>
-  <% @more_songs.each do |song| %>
-    <div class="song">
-      <p>
-        <a href="/songs/<%= song.id %>"><%= song.title %></a>
-      </p>
-      <p>
-        <a href="<%= song.url %>"><%= song.url %></a>
-      </p>
-      <p>
-        <small>
-          Created at: <%= song.created_at %>
-        </small>
-      </p>
-    </div>
-  <% end %>
+  <table class="table table-striped">
+  <caption>
+   <h2>
+     More songs posted by <%= User.find(@song.user_id).email %>
+   </h2>
+  </caption>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>URL</th>
+      <th>Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @more_songs.each do |song| %>
+      <tr>
+        <td>
+          <a href="/songs/<%= song.id %>"><%= song.title %></a>
+        </td>
+        <td>
+          <a href="<%= song.url %>"><%= song.url %></a>
+        </td>
+        <td>
+          <%= song.created_at %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>
-
 <hr/>
 <a href="/songs">Back to all songs</a>
