@@ -44,6 +44,11 @@ post '/login' do
   end
 end
 
+post '/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
+
 # Songs
 get '/songs' do
   @songs = Song.all

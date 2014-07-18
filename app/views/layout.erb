@@ -23,6 +23,11 @@
       <p>
         Logged in as <%= current_user.email %>
       </p>
+      <p>
+        <form method="post" action="/logout">
+          <input type="submit" value="Logout">
+        </form>
+      </p>
     <% else %>
       <a href="/signup">Sign Up</a> or <a href="/login">Log In</a>
     <% end %>
