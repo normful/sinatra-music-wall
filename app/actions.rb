@@ -77,3 +77,11 @@ get '/songs/:id' do
   @more_songs = Song.where.not(id: params[:id]).where(user_id: @song.user_id)
   erb :'songs/show'
 end
+
+post '/songs/:id' do
+  Upvote.create!(
+    user_id: current_user.id,
+    song_id: params[:song_id]
+  )
+  redirect request.path_info
+end

@@ -1,4 +1,17 @@
-<h1><%= @song.title %></h1>
+<h1>
+  <%= @song.title %>
+</h1>
+<h4>
+  Upvotes: <%= Upvote.where({ song_id: @song.id }).size %>
+</h4>
+<% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
+  <form method="post" action="">
+    <input type="hidden" name="song_id" value="<%= @song.id %>">
+    <button type="submit" class="btn btn-primary">
+      Upvote
+    </button>
+  </form>
+<% end %>
 <p>
 Posted by <%= User.find(@song.user_id).email %>
 </p>
