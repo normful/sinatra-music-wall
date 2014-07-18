@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
     uniqueness: true,
     :email_format => {:message => 'invalid email format'}
   validates :password,
-    presence: true
+    presence: true,
+    length: { minimum: 8 }
 end
