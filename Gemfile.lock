@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/alexdunae/validates_email_format_of.git
+  revision: f2b20985865069905ba58580bfcfb41c198107b6
+  specs:
+    validates_email_format_of (1.5.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -93,3 +99,4 @@ DEPENDENCIES
   sqlite3
   tux
   validate_url
+  validates_email_format_of!

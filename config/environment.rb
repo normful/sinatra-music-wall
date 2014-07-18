@@ -3,6 +3,7 @@ require 'bundler/setup'
 
 require 'active_support/all'
 require 'validate_url'
+require 'validates_email_format_of'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'
