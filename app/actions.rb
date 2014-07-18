@@ -16,7 +16,7 @@ end
 post '/songs' do
   @song = Song.new(
     title: params[:title],
-    author:  params[:author],
+    author: params[:author],
     url: params[:url]
   )
   if @song.save
