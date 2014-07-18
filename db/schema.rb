@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20140718031835) do
 
   create_table "songs", force: true do |t|
+    t.integer  "user_id"
     t.string   "title"
-    t.string   "author"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
