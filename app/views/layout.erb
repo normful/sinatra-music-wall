@@ -19,7 +19,13 @@
 </head>
 <body>
   <header>
-    <a href="/signup">Sign Up</a>
+    <% if current_user then %>
+      <p>
+        Logged in as <%= current_user.email %>
+      </p>
+    <% else %>
+      <a href="/signup">Sign Up</a>
+    <% end %>
   </header>
   <%= yield %>
 </body>

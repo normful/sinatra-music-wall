@@ -1,6 +1,12 @@
+helpers do
+  def current_user
+    User.find(session[:user_id]) if session[:user_id]
+  end
+end
+
 # Homepage (Root path)
 get '/' do
-  erb :index
+  current_user ? (redirect '/songs') : (erb :index)
 end
 
 # User signup
@@ -15,6 +21,7 @@ post '/signup' do
     password: params[:password]
   )
   if @user.save
+    session[:user_id] = @user.id
     redirect '/songs'
   else
     erb :'auth/signup'
@@ -38,11 +45,7 @@ post '/songs' do
     author: params[:author],
     url: params[:url]
   )
-  if @song.save
-    redirect '/songs'
-  else
-    erb :'songs/new'
-  end
+  @song.save ? (redirect'/songs') : (erb :'songs/new')
 end
 
 get '/songs/:id' do
