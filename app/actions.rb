@@ -65,7 +65,7 @@ get '/songs/new' do
   erb :'songs/new'
 end
 
-post '/songs' do
+post '/songs/new' do
   begin
     @song = Song.create!(
       user_id: current_user.id,
@@ -80,14 +80,15 @@ end
 
 get '/songs/:id' do
   @song = Song.find params[:id]
+  @reviews = Review.find_by song_id: params[:id]
   @more_songs = Song.where.not(id: params[:id]).where(user_id: @song.user_id)
   erb :'songs/show'
 end
 
-post '/songs/:id' do
+post '/songs/upvote' do
   Upvote.create!(
     user_id: current_user.id,
     song_id: params[:song_id]
   )
-  redirect request.path_info
+  redirect '/songs/' + params[:song_id]
 end

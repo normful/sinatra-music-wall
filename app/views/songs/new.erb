@@ -1,4 +1,4 @@
-<% if @song.errors.any? %>
+<% unless @song.nil? || !@song.errors.any? %>
 <div>
   <strong>There following errors were detected with your song format. Please fix them and try again:</strong>
   <ul>
@@ -9,7 +9,7 @@
 </div>
 <% end %>
 <div class="container">
-    <form method="POST" class="form-horizontal" action="/songs">
+    <form method="POST" class="form-horizontal" action="/songs/new">
       <h1>Post a new song</h1>
         <div class="form-group">
             <label class="control-label col-xs-2" for="title">Title</label>

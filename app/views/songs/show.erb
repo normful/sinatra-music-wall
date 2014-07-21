@@ -5,7 +5,7 @@
   Upvotes: <%= Upvote.where({ song_id: @song.id }).size %>
 </h4>
 <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
-  <form method="post" action="">
+  <form method="post" action="/songs/upvote">
     <input type="hidden" name="song_id" value="<%= @song.id %>">
     <button type="submit" class="btn btn-success">
       Upvote
@@ -23,36 +23,70 @@ Posted by <%= User.find(@song.user_id).email %>
     Created at: <%= @song.created_at %>
   </small>
 </p>
-<% unless @more_songs.empty? %>
+
+<% unless @reviews.nil? %>
   <table class="table table-striped">
-  <caption>
-   <h2>
-     More songs posted by <%= User.find(@song.user_id).email %>
-   </h2>
-  </caption>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>URL</th>
-      <th>Created at</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @more_songs.each do |song| %>
+    <caption>
+     <h2>
+       Reviews
+     </h2>
+    </caption>
+    <thead>
       <tr>
-        <td>
-          <a href="/songs/<%= song.id %>"><%= song.title %></a>
-        </td>
-        <td>
-          <a href="<%= song.url %>"><%= song.url %></a>
-        </td>
-        <td>
-          <%= song.created_at %>
-        </td>
+        <th>User</th>
+        <th>Review</th>
+        <th>Created at</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td>
+            <%= review.user %>
+          </td>
+          <td>
+            <%= review.review_text %>
+          </td>
+          <td>
+            <%= review.created_at %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
+
+<% unless @more_songs.nil? %>
+  <table class="table table-striped">
+    <caption>
+     <h2>
+       More songs posted by <%= User.find(@song.user_id).email %>
+     </h2>
+    </caption>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>URL</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @more_songs.each do |song| %>
+        <tr>
+          <td>
+            <a href="/songs/<%= song.id %>"><%= song.title %></a>
+          </td>
+          <td>
+            <a href="<%= song.url %>"><%= song.url %></a>
+          </td>
+          <td>
+            <%= song.created_at %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <hr/>
 <a href="/songs">Back to all songs</a>
