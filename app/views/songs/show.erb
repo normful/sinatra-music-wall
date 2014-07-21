@@ -27,7 +27,9 @@
     </small>
   </p>
 
-  <% if current_user && Review.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
+  <% if !current_user %>
+    Sign in or sign up to review this song.
+  <% elsif Review.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
     <form method="POST" class="form-horizontal" action="/songs/review" id="add-review-form">
       <h1>Add a review</h1>
       <input type="hidden" name="song_id" value="<%= @song.id %>">
@@ -42,6 +44,7 @@
         </div>
       </div>
     </form>
+  <% else %>
   <% end %>
 
   <% unless @reviews.nil? || @reviews.empty? %>
