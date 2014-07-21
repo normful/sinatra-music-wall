@@ -80,7 +80,7 @@ end
 
 get '/songs/:id' do
   @song = Song.find params[:id]
-  @reviews = Review.find_by song_id: params[:id]
+  @reviews = Review.where(song_id: params[:id])
   @more_songs = Song.where.not(id: params[:id]).where(user_id: @song.user_id)
   erb :'songs/show'
 end
@@ -89,6 +89,15 @@ post '/songs/upvote' do
   Upvote.create!(
     user_id: current_user.id,
     song_id: params[:song_id]
+  )
+  redirect '/songs/' + params[:song_id]
+end
+
+post '/songs/review' do
+  Review.create!(
+    user_id: current_user.id,
+    song_id: params[:song_id],
+    review_text: params[:review_text]
   )
   redirect '/songs/' + params[:song_id]
 end
