@@ -93,7 +93,7 @@ DEPENDENCIES
   puma
   rake
   shotgun
-  sinatra
+  sinatra (= 1.4.4)
   sinatra-activerecord
   sinatra-contrib
   sqlite3

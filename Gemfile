@@ -1,11 +1,12 @@
 # A sample Gemfile
 source "https://rubygems.org"
+ruby "2.1.2"
 
 gem 'rake'
 gem 'activesupport'
 gem 'validate_url'
 
-gem 'sinatra'
+gem 'sinatra', '1.4.4'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 
