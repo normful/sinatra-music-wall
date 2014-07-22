@@ -7,10 +7,9 @@ body {
   }
 }
 
-.songlist {
-  -webkit-flex: initial;
-          flex: initial;
-  width: 600px;
-  min-width: 400px;
-  margin: 0 auto;
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+  margin: 20px 0;
 }
