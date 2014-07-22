@@ -17,7 +17,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <title></title>
+  <title>Music Wall</title>
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -31,20 +31,26 @@
         </button>
         <a class="navbar-brand" href="/">Music Wall</a>
       </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="/songs">Home</a></li>
-          <% if current_user then %>
-            <li><form method="post" action="/logout"><button type="submit" class="btn btn-primary">Logout</button></form></li>
-          <% else %>
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/login">Log In</a></li>
-          <% end %>
-      </div><!--/.nav-collapse -->
+      <div class="navbar-collapse collapse">
+        <% unless current_user then %>
+          <form class="navbar-form navbar-right" role="form" method="POST" action="/login">
+            <div class="form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength=100 required autofocus>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" maxlength=50 required>
+            </div>
+            <button type="submit" class="btn btn-success">Login</button>
+          </form>
+        <% else %>
+          <form class="navbar-form navbar-right" role="form" method="POST" action="/logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        <% end %>
+      </div>
     </div>
   </div>
   <%= yield %>
-
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->

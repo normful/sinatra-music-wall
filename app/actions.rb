@@ -29,17 +29,13 @@ post '/signup' do
 end
 
 # User login
-get '/login' do
-  erb :'auth/login'
-end
-
 post '/login' do
   begin
     @user = User.find_by!(email: params[:email], password: params[:password])
     session[:user_id] = @user.id
     redirect '/songs'
   rescue ActiveRecord::RecordNotFound
-    erb :'auth/login'
+    erb :'index'
   end
 end
 
