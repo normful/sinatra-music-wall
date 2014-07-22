@@ -13,6 +13,8 @@ body {
 
 .cover {
   padding: 100px 0; }
+  .cover h1 {
+    text-align: center; }
 
 .form-signin {
   max-width: 330px;
