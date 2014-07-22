@@ -38,3 +38,6 @@ body {
     margin-bottom: 15px;
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
+
+.form-input-text {
+  width: 100%; }
