@@ -4,6 +4,7 @@ class AddReviews < ActiveRecord::Migration
       t.belongs_to :user
       t.belongs_to :song
       t.string :review_text
+      t.integer :rating
       t.timestamps
     end
   end
