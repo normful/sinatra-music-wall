@@ -46,6 +46,7 @@
           <form class="navbar-form navbar-right" role="form" method="POST" action="/logout">
             <button type="submit" class="btn btn-danger">Logout</button>
           </form>
+          <p class="navbar-text navbar-right">Signed in as <%= current_user.email %></p>
         <% end %>
       </div>
     </div>
