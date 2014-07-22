@@ -17,6 +17,7 @@ gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_e
 
 group :development, :test do
   gem 'pry'
+  gem 'thin'
   gem 'shotgun'
   gem 'sqlite3'
 end
