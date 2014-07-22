@@ -1,10 +1,8 @@
 <div class="container">
-  <h1>
-    <%= @song.title %>
-  </h1>
-  <h4>
-    Upvotes: <%= Upvote.where({ song_id: @song.id }).size %>
-  </h4>
+  <h1><%= @song.title %></h1>
+
+  <h4>Upvotes: <%= Upvote.where({ song_id: @song.id }).size %></h4>
+
   <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
     <form method="post" action="/songs/upvote">
       <input type="hidden" name="song_id" value="<%= @song.id %>">
@@ -13,19 +11,10 @@
       </button>
     </form>
   <% end %>
-  <p>
-    Posted by <%= User.find(@song.user_id).email %>
-  </p>
-  <p>
-    <a href="<%= @song.url %>">
-      <%= @song.url %>
-    </a>
-  </p>
-  <p>
-    <small>
-      Created at: <%= @song.created_at %>
-    </small>
-  </p>
+
+  <p>Posted by <%= User.find(@song.user_id).email %></p>
+  <p><a href="<%= @song.url %>"><%= @song.url %></a></p>
+  <p><small>Created at: <%= @song.created_at %></small></p>
 
   <% if !current_user %>
     Sign in or sign up to review this song.
@@ -59,6 +48,7 @@
           <th>User</th>
           <th>Review</th>
           <th>Created at</th>
+          <th>Delete your review</th>
         </tr>
       </thead>
       <tbody>
@@ -67,6 +57,15 @@
             <td><%= User.find(review.user_id).email %></td>
             <td><%= review.review_text %></td>
             <td><%= review.created_at %></td>
+            <td>
+              <% if review.user_id == current_user.id %>
+                <form method="POST" class="form-horizontal" action="/songs/review/delete">
+                  <input type="hidden" name="song_id" value="<%= @song.id %>">
+                  <input type="hidden" name="review_id" value="<%= review.id %>">
+                  <button type="submit" class="btn btn-danger">Delete Review</button>
+                </form>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -101,3 +101,8 @@ post '/songs/review' do
   )
   redirect '/songs/' + params[:song_id]
 end
+
+post '/songs/review/delete' do
+  Review.delete(params[:review_id])
+  redirect '/songs/' + params[:song_id]
+end
