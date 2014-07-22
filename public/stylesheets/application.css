@@ -11,6 +11,9 @@ body {
   .container .text-muted {
     margin: 20px 0; }
 
+.cover {
+  padding: 100px 0; }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
