@@ -1,3 +1,5 @@
+<div class="container">
+
 <% if @user.errors.any? %>
 <div>
   <strong>Error:</strong>
@@ -8,25 +10,11 @@
   </ul>
 </div>
 <% end %>
-<div class="container">
-    <form method="POST" class="form-horizontal" action="/signup">
-      <h1>Sign up</h1>
-        <div class="form-group">
-            <label class="control-label col-xs-2" for="email">Email</label>
-            <div class="col-xs-5">
-              <input type="email" id="email" name="email" value="<%= @user.email %>" maxlength=100 required="required">
-            </div>
-          </div>
-        <div class="form-group">
-            <label class="control-label col-xs-2" for="password">Password</label>
-            <div class="col-xs-5">
-              <input type="password" id="password" name="password" value="<%= @user.password %>" maxlength=50 required="required">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </form>
+
+  <form method="POST" class="form-signin" role="form" action="/login">
+    <h2 class="form-signin-heading">Sign up for an account</h2>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<%= @user.email %>" maxlength=100 required autofocus>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<%= @user.password %>" maxlength=50 required>
+    <button type="submit" class="btn btn-lg btn-success btn-block">Sign up</button>
+  </form>
 </div>
