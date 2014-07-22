@@ -66,14 +66,14 @@ get '/songs/new' do
 end
 
 post '/songs/new' do
-  begin
-    @song = Song.create!(
+  @song = Song.create(
       user_id: current_user.id,
       title: params[:title],
       url: params[:url]
-    )
+  )
+  if @song.save
     redirect'/songs'
-  rescue ActiveRecord::RecordInvalid
+  else
     erb :'songs/new'
   end
 end
@@ -97,6 +97,7 @@ post '/songs/review' do
   Review.create!(
     user_id: current_user.id,
     song_id: params[:song_id],
+    rating: params[:rating],
     review_text: params[:review_text]
   )
   redirect '/songs/' + params[:song_id]

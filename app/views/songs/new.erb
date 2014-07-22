@@ -1,6 +1,6 @@
-<% unless @song.nil? || !@song.errors.any? %>
-<div>
-  <strong>There following errors were detected with your song format. Please fix them and try again:</strong>
+<% if @song.errors.any? %>
+<div class="container">
+  <h4>The following errors were detected with your song format.</h4>
   <ul>
     <% @song.errors.full_messages.each do |song| %>
       <li><%= song %></li>
@@ -16,7 +16,7 @@
             <div class="col-xs-5">
               <input type="text" id="title" name="title" value="<%= @song.title %>">
             </div>
-          </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-xs-2" for="url">URL (optional)</label>
             <div class="col-xs-5">

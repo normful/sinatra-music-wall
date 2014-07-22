@@ -6,9 +6,7 @@
   <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
     <form method="post" action="/songs/upvote">
       <input type="hidden" name="song_id" value="<%= @song.id %>">
-      <button type="submit" class="btn btn-success">
-        Upvote
-      </button>
+      <button type="submit" class="btn btn-success">Upvote</button>
     </form>
   <% end %>
 
@@ -23,12 +21,24 @@
       <h1>Add a review</h1>
       <input type="hidden" name="song_id" value="<%= @song.id %>">
       <div class="form-group">
+        <div class="col-xs-3">
+        <label class="control-label" for="rating">Rating</label>
+        <select name="rating" id="rating" class="form-control" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
           <div class="col-xs-5">
             <textarea form="add-review-form" id="review_text" name="review_text" rows="5" cols="50" required></textarea>
           </div>
         </div>
       <div class="form-group">
-        <div class="col-xs-2">
+        <div class="col-xs-3">
           <button type="submit" class="btn btn-success">Post Review</button>
         </div>
       </div>
@@ -46,6 +56,7 @@
       <thead>
         <tr>
           <th>User</th>
+          <th>Rating</th>
           <th>Review</th>
           <th>Created at</th>
           <th>Delete your review</th>
@@ -55,6 +66,7 @@
         <% @reviews.each do |review| %>
           <tr>
             <td><%= User.find(review.user_id).email %></td>
+            <td><%= review.rating %></td>
             <td><%= review.review_text %></td>
             <td><%= review.created_at %></td>
             <td>
