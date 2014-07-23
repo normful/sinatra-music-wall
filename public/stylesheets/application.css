@@ -12,9 +12,8 @@ body {
     margin: 20px 0; }
 
 .cover {
-  padding: 100px 0; }
-  .cover h1 {
-    text-align: center; }
+  padding: 100px 0;
+  text-align: center; }
 
 .form-signin {
   max-width: 330px;
