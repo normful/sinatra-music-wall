@@ -2,32 +2,6 @@
   <div class="page-header">
     <h1>Songs</h1>
   </div>
-  <% @songs.each do |song| %>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3>
-          <a href="/songs/<%= song.id %>"><%= song.title %></a>
-        </h3>
-        <a href="<%= song.url %>"><%= song.url %></a>
-      </div>
-      <div class="panel-body">
-        <h4>
-          <%= Upvote.where({ song_id: song.id }).size %> upvotes
-        </h4>
-      </div>
-      <div class="panel-footer">
-        Posted by <%= User.find(song.user_id).email %> on <%= DateTime.parse(song.created_at.to_s).strftime("%b %d %Y") %>
-      </div>
-    </div>
-  <% end %>
-  <div class="col-xs-4 col-xs-offset-4">
-    <form class="form-horizontal" role="form" method="GET" action="/songs/new">
-      <div class="form-group">
-        <button type="submit" class="btn btn-success btn-block">
-          <span class="glyphicon glyphicon-plus-sign"></span>
-          Post new song
-        </button>
-      </div>
-    </form>
-  </div>
+  <%= erb :'songs/_song_index_panels' %>
+  <%= erb :'songs/_post_new_song_button' %>
 </div>
