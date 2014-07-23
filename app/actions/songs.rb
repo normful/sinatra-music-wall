@@ -1,5 +1,5 @@
 get '/songs' do
-  @songs_with_upvotes = Song.joins(:upvotes).group("song_id").order("COUNT(songs.*) DESC")
+  @songs_with_upvotes = Song.joins(:upvotes).group("song_id").order("COUNT(upvotes.user_id) DESC")
   @all_songs = Song.all
   @songs = (@songs_with_upvotes + @all_songs).uniq
   erb :'songs/index'
