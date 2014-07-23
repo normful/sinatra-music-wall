@@ -16,7 +16,7 @@
         </h4>
       </div>
       <div class="panel-footer">
-        Posted by <%= User.find(song.user_id).email %> at <%= song.created_at %>
+        Posted by <%= User.find(song.user_id).email %> on <%= DateTime.parse(song.created_at.to_s).strftime("%b %d %Y") %>
       </div>
     </div>
   <% end %>
