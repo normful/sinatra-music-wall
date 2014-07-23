@@ -6,7 +6,7 @@ configure do
 
   configure :production do
     set :database, {
-      adapter: "postgres",
+      adapter: "postgresql",
       database: "postgres://jawumeabvjywyn:5pFM6Kseh2CshvdpCm53LX-z-7@ec2-50-17-207-54.compute-1.amazonaws.com:5432/d8cft36k91f075"
     }
   end
