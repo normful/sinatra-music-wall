@@ -2,49 +2,59 @@
 
   <div class="page-header">
     <h1><%= @song.title %></h1>
+
     <p><a href="<%= @song.url %>"><%= @song.url %></a></p>
-    <span class="label label-success">
-      <%= Upvote.where({ song_id: @song.id }).size %> upvotes
-    </span>
+
+    <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
+      <form method="post" action="/songs/upvote">
+        <input type="hidden" name="song_id" value="<%= @song.id %>">
+          <button type="submit" class="btn btn-warning btn-sm">
+            <span class="glyphicon glyphicon-hand-right"></span>
+            <%= Upvote.where({ song_id: @song.id }).size %> upvotes
+          </button>
+      </form>
+    <% else %>
+      <button class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        <%= Upvote.where({ song_id: @song.id }).size %> upvotes
+        </span>
+      </button>
+    <% end %>
+
     <h5>Posted by <%= User.find(@song.user_id).email %> on <%= DateTime.parse(@song.created_at.to_s).strftime("%b %d %Y") %></h5>
+
   </div>
 
-  <% if current_user && Upvote.where({ user_id: current_user.id, song_id: @song.id }).empty? %>
-    <form method="post" action="/songs/upvote">
-      <input type="hidden" name="song_id" value="<%= @song.id %>">
-        <button type="submit" class="btn btn-success btn-sm">
-          Upvote <span class="glyphicon glyphicon-hand-up"></span>
-        </button>
-    </form>
-  <% end %>
-
   <% unless @reviews.nil? || @reviews.empty? %>
-    <ul class="list-group">
-      <% @reviews.each do |review| %>
-        <li class="list-group-item">
-          <h3>
-            <%= User.find(review.user_id).email %>
-            <span class="label label-primary">
-              <%= review.rating %>
-              <span class="glyphicon glyphicon-star"></span>
-            </span>
-          </h3>
-          <h4><%= DateTime.parse(review.created_at.to_s).strftime("%b %d %Y") %></h4>
-          <p><%= review.review_text %></p>
-          <% if current_user && review.user_id == current_user.id %>
-            <form method="POST" class="form-horizontal" action="/songs/review/delete">
-              <input type="hidden" name="song_id" value="<%= @song.id %>">
-              <input type="hidden" name="review_id" value="<%= review.id %>">
-              <div class="form-group">
-                <div class="col-sm-1">
-                  <button type="submit" class="btn btn-danger">Delete Review</button>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>Reviews</h3></div>
+      <ul class="list-group">
+        <% @reviews.each do |review| %>
+          <li class="list-group-item">
+            <h3>
+              <%= User.find(review.user_id).email %>
+              <span class="label label-primary">
+                <%= review.rating %>
+                <span class="glyphicon glyphicon-star"></span>
+              </span>
+            </h3>
+            <h4><%= DateTime.parse(review.created_at.to_s).strftime("%b %d %Y") %></h4>
+            <p><%= review.review_text %></p>
+            <% if current_user && review.user_id == current_user.id %>
+              <form method="POST" class="form-horizontal" action="/songs/review/delete">
+                <input type="hidden" name="song_id" value="<%= @song.id %>">
+                <input type="hidden" name="review_id" value="<%= review.id %>">
+                <div class="form-group">
+                  <div class="col-sm-1">
+                    <button type="submit" class="btn btn-danger">Delete Review</button>
+                  </div>
                 </div>
-              </div>
-            </form>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+              </form>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
   <% if !current_user %>
@@ -82,32 +92,25 @@
   <% end %>
 
   <% unless @more_songs.nil? || @more_songs.empty? %>
-    <table class="table table-striped">
-      <caption>
-       <h2>
-         More songs posted by <%= User.find(@song.user_id).email %>
-       </h2>
-      </caption>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>URL</th>
-          <th>Created at</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @more_songs.each do |song| %>
-          <tr>
-            <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
-            <td><a href="<%= song.url %>"><%= song.url %></a> </td>
-            <td><%= song.created_at %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3>More songs posted by <%= User.find(@song.user_id).email %></h3></div>
+      <% @more_songs.each do |song| %>
+        <a href="/songs/<%= song.id %>" class="list-group-item"><%= song.title %></a>
+      <% end %>
+    </div>
   <% end %>
 
-  <hr/>
-  <a href="/songs">Back to all songs</a>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <form class="form-horizontal" role="form" method="GET" action="/songs">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            Back to all songs
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 </div>
