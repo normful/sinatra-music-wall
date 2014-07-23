@@ -4,18 +4,24 @@ configure do
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 
-  configure :production do
-    set :database, {
-      adapter: "postgresql",
-      database: "postgres://jawumeabvjywyn:5pFM6Kseh2CshvdpCm53LX-z-7@ec2-50-17-207-54.compute-1.amazonaws.com:5432/d8cft36k91f075"
-    }
-  end
-
-  configure [:development, :test].each do
+  configure :development, :test do
     set :database, {
       adapter: "sqlite3",
       database: "db/db.sqlite3"
     }
+  end
+
+  configure :production do
+    db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
+
+    ActiveRecord::Base.establish_connection(
+     :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+     :host     => db.host,
+     :username => db.user,
+     :password => db.password,
+     :database => db.path[1..-1],
+     :encoding => 'utf8'
+    )
   end
 
   # Load all models from app/models, using autoload instead of require

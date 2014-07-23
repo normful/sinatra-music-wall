@@ -4,7 +4,6 @@ ruby "2.1.2"
 
 gem 'pry'
 gem 'rake'
-gem 'pg'
 gem 'activesupport'
 gem 'validate_url'
 
@@ -22,3 +21,8 @@ group :development, :test do
   gem 'shotgun'
   gem 'sqlite3'
 end
+
+group :production do
+  gem 'pg'
+end
+
