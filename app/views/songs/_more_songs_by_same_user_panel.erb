@@ -1,0 +1,14 @@
+<% unless @more_songs.nil? || @more_songs.empty? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>
+        More songs posted by <%= User.find(@song.user_id).email %>
+      </h3>
+    </div>
+    <% @more_songs.each do |song| %>
+      <a href="/songs/<%= song.id %>" class="list-group-item">
+        <%= song.title %>
+      </a>
+    <% end %>
+  </div>
+<% end %>

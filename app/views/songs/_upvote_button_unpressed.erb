@@ -1,0 +1,7 @@
+<form method="post" action="/songs/upvote">
+  <input type="hidden" name="song_id" value="<%= @song.id %>">
+    <button type="submit" class="btn btn-warning btn-sm">
+      <span class="glyphicon glyphicon-hand-right"></span>
+      <%= Upvote.where({ song_id: @song.id }).size %> upvotes
+    </button>
+</form>

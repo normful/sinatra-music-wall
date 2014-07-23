@@ -1,0 +1,5 @@
+<button class="btn btn-success btn-sm">
+  <span class="glyphicon glyphicon-thumbs-up"></span>
+  <%= Upvote.where({ song_id: @song.id }).size %> upvotes
+  </span>
+</button>
