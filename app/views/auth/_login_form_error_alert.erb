@@ -1,0 +1,11 @@
+<% if @user.nil? %>
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <strong>
+        Invalid email or password. Please try again.
+        <a href="/signup">Sign up</a> for a new account if you don't already have one.
+      </strong>
+    </div>
+  </div>
+<% end %>

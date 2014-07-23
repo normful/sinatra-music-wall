@@ -23,12 +23,14 @@ body {
   text-align: center;
 }
 
-.form-signin {
+.form-signup,
+.form-login {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 
-  .form-signin-heading {
+  .form-signup-heading,
+  .form-login-heading {
     margin-bottom: 10px;
   }
 
